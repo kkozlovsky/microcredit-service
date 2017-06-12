@@ -1,0 +1,104 @@
+<%= form_for @changeset, client_path(@conn, :create), fn f -> %>
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2">Фамилия</label>
+      <div class="col-sm-10">
+        <%= text_input f, :last_name, placeholder: "Фамилия", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Имя</label>
+      <div class="col-sm-10">
+        <%= text_input f, :first_name, placeholder: "Имя", class: "form-control", required: "true" %>
+      </div>  
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Отчество</label>
+      <div class="col-sm-10">
+        <%= text_input f, :path_name, placeholder: "Отчество", class: "form-control", required: "true" %>
+      </div>  
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Пол</label>
+      <div class="col-sm-10">
+        <label>Мужской <%= radio_button f, :gender, "m" %></label> 
+        <label>Женский <%= radio_button f, :gender, "w" %></label> 
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Дата рождения</label>
+      <div class="col-sm-10">
+        <%= text_input f, :date, placeholder: "Дата рождения", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Индекс</label>
+      <div class="col-sm-10">
+        <%= text_input f, :postcode, placeholder: "Индекс", class: "form-control", required: "true" %>
+      </div>  
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Город</label>
+      <div class="col-sm-10">
+        <%= text_input f, :city, placeholder: "Город", class: "form-control", required: "true" %>
+      </div> 
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Улица</label>
+      <div class="col-sm-10">
+        <%= text_input f, :street, placeholder: "Улица", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Дом</label>
+      <div class="col-sm-10">
+        <%= number_input f, :house, placeholder: "Дом", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Квартира</label>
+      <div class="col-sm-10">
+        <%= number_input f, :apartment, placeholder: "Квартира", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Телефон</label>
+      <div class="col-sm-10">
+        <%= text_input f, :phone, placeholder: "Телефон", class: "form-control", required: "true" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="col-sm-2">Логин</label>
+      <div class="col-sm-10">
+        <%= text_input f, :login, placeholder: "Логин", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Пароль</label>
+      <div class="col-sm-10">
+        <%= text_input f, :password, placeholder: "Пароль", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2">Аватар</label>
+      <div class="col-sm-10">
+        <%= url_input f, :userpic, placeholder: "Ссылка на аватар", class: "form-control", required: "true" %>
+      </div>
+    </div>
+
+    <%= submit "Сохранить", class: "btn btn-primary" %>
+  </div>
+<% end %>

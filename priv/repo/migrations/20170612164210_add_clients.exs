@@ -10,6 +10,7 @@ defmodule MicrocreditService.Repo.Migrations.AddClients do
       add :date, :string
       add :postcode, :string
       add :city, :string
+      add :street, :string
       add :house, :integer
       add :apartment, :integer
       add :phone, :string

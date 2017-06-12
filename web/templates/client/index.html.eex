@@ -1,0 +1,32 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Фото</th>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Пол</th>
+      <th>Телефон</th>
+      <th>Id</th>
+      <th>Удалить</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for client <- @clients do %>
+    <tr>
+      <td><%= link to: client_path(@conn, :edit, client) do %> <img src="<%= client.userpic %>" alt="avatar" class="avatar img-circle"> <% end %></td>
+      <td><%= client.last_name %></td>
+      <td><%= client.first_name %></td>
+      <td><%= client.path_name %></td>
+      <td><%= client.gender %></td>
+      <td><%= client.phone %></td>
+      <td><%= client.id %></td>
+      <td><%= link "", class: "btn btn-danger fa fa-trash", to: client_path(@conn, :delete, client), method: :delete %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= link "Добавить клиента", class: "btn btn-primary", to: client_path(@conn, :new) %>
+</div>
