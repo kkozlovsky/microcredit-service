@@ -1,3 +1,3 @@
-# MicrocreditService
+# Microcredit Service
 
 Elixir + Phoenix example
