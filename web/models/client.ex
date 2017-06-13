@@ -15,14 +15,15 @@ defmodule MicrocreditService.Client do
       field :phone, :string
       field :login, :string
       field :password, :string
+      field :blacklist, :boolean, default: false
       field :userpic, :string
       timestamps()
     end
 
     def changeset(struct, params \\ %{}) do
         struct
-        |> cast(params, [:last_name, :first_name, :path_name, :gender, :date, :postcode, :city, :street, :house, :apartment, :phone, :login, :password, :userpic])
-        |> validate_required([:last_name, :first_name, :path_name, :gender, :date, :postcode, :city, :street, :house, :apartment, :phone, :login, :password, :userpic])
+        |> cast(params, [:last_name, :first_name, :path_name, :gender, :date, :postcode, :city, :street, :house, :apartment, :phone, :login, :password, :blacklist, :userpic])
+        |> validate_required([:last_name, :first_name, :path_name, :gender, :date, :postcode, :city, :street, :house, :apartment, :phone, :login, :password, :blacklist, :userpic])
     end
     
 end
