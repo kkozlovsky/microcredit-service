@@ -22,6 +22,7 @@ defmodule MicrocreditService.Router do
     get "/clients/:id/edit", ClientController, :edit
     put "/clients/:id", ClientController, :update
     delete "/clients/:id", ClientController, :delete
+    get "/blacklist", ClientController, :show_blacklist
   end
 
   scope "/loans", MicrocreditService do

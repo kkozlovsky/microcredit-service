@@ -35,6 +35,6 @@
   </div>
 
   <div class="col-md-6 text-center">
-    <%= link "Чёрный список", class: "btn btn-danger", to: client_path(@conn, :show_blacklist) %>
+    <%= link "Полный список", class: "btn btn-success", to: client_path(@conn, :index) %>
   </div>
 </div>  

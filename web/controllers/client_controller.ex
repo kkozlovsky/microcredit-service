@@ -1,6 +1,7 @@
 defmodule MicrocreditService.ClientController do
   use MicrocreditService.Web, :controller
 
+  import Ecto.Query
   alias MicrocreditService.Client
 
   def index(conn, _params) do
@@ -50,5 +51,11 @@ defmodule MicrocreditService.ClientController do
 
     conn
     |> redirect(to: client_path(conn, :index))
+  end
+
+  def show_blacklist(conn, _params) do
+    query = from u in Client, where: [blacklist: true], select: u
+    black_clients = Repo.all(query)
+    render conn, "blacklist.html", clients: black_clients
   end
 end
