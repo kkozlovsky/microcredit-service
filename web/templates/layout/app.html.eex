@@ -29,10 +29,26 @@
   </div>
 </nav>
     <div class="container">
+        
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
+
+      <%= if get_flash(@conn, :info) do %>
+        <div class="navbar-fixed-bottom row">
+          <div class="navbar-inner">
+            <div class="container col-md-2 col-md-offset-10">
+              <div class="alert alert-info" role="alert">
+                <%= get_flash(@conn, :info) %>
+              </div>
+            </div>
+          </div>
+        </div>      
+      <% end %>
+      
     </div> <!-- /container -->
+
+
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>

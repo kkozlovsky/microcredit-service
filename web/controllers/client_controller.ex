@@ -21,6 +21,7 @@ defmodule MicrocreditService.ClientController do
     case Repo.insert(changeset) do
       {:ok, _client} ->
         conn
+        |> put_flash(:info, "Клиент добавлен")
         |> redirect(to: client_path(conn, :index))
       {:error, changeset} ->
         render conn, "new.html", changeset: changeset
@@ -40,6 +41,7 @@ defmodule MicrocreditService.ClientController do
     case Repo.update(changeset) do
       {:ok, _client} ->
         conn
+        |> put_flash(:info, "Данные клиента обновлены")
         |> redirect(to: client_path(conn, :index))
       {:error, changeset} ->
         render conn, "edit.html", changeset: changeset
@@ -50,6 +52,7 @@ defmodule MicrocreditService.ClientController do
     Repo.get!(Client, client_id) |> Repo.delete!
 
     conn
+    |> put_flash(:info, "Клиент удалён")
     |> redirect(to: client_path(conn, :index))
   end
 
