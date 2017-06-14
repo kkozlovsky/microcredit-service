@@ -17,6 +17,7 @@ defmodule MicrocreditService.Client do
       field :password, :string
       field :blacklist, :boolean, default: false
       field :userpic, :string
+      has_many :loans, MicrocreditService.Loan
       timestamps()
     end
 

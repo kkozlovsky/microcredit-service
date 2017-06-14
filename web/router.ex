@@ -21,7 +21,13 @@ defmodule MicrocreditService.Router do
     post "/clients", ClientController, :create
     get "/clients/:id/edit", ClientController, :edit
     put "/clients/:id", ClientController, :update
-    delete "clients/:id", ClientController, :delete
+    delete "/clients/:id", ClientController, :delete
+  end
+
+  scope "/loans", MicrocreditService do
+    pipe_through :browser # Use the default browser stack
+
+    get "/", LoanController, :index
   end
 
   # Other scopes may use custom stacks.
