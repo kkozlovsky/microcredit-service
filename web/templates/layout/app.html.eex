@@ -45,6 +45,18 @@
           </div>
         </div>      
       <% end %>
+
+      <%= if get_flash(@conn, :error) do %>
+        <div class="navbar-fixed-bottom row">
+          <div class="navbar-inner">
+            <div class="container col-md-2 col-md-offset-10">
+              <div class="alert alert-danger" role="alert">
+                <%= get_flash(@conn, :error) %>
+              </div>
+            </div>
+          </div>
+        </div>      
+      <% end %>
       
     </div> <!-- /container -->
 
