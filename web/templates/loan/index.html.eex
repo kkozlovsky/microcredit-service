@@ -1,25 +1,26 @@
 <h1 class="text-center">Список займов</h1>
-<table class="table table-hover">
+<table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Дата выдачи</th>
-      <th>Дата погашения</th>
-      <th>Отчество</th>
-      <th>Закрыт</th>
-      <th>Выплачено</th>
-      <th>Выдано</th>
+      <th class="text-center">Id займа</th>
+      <th class="text-center">Дата выдачи</th>
+      <th class="text-center">Дата погашения</th>
+      <th class="text-center">Закрыт</th>
+      <th class="text-center">Выдано</th>
+      <th class="text-center">Выплачено</th>
+      <th class="text-center">Остаток</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="text-center">
   <%= for loan <- @loans do %>
     <tr>
       <td><%= loan.id %></td>
-      <td><%= loan.start_date %></td>
+      <td><%= loan.start_date |> IO.inspect %></td>
       <td><%= loan.due_date %></td>
       <td><%= loan.closed %></td>
-      <td><%= loan.paid_amount %></td>
       <td><%= loan.total_amount %></td>
+      <td><%= loan.paid_amount %></td>
+      <td><%= loan.total_amount - loan.paid_amount %></td>
     </tr>
   <% end %>
   </tbody>

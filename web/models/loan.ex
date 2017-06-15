@@ -2,11 +2,11 @@ defmodule MicrocreditService.Loan do
     use MicrocreditService.Web, :model
 
     schema "loans" do
-      field :start_date, :date, default: Date.utc_today()
-      field :due_date, :date
+      field :start_date, Ecto.DateTime, null: false
+      field :due_date, Ecto.DateTime, null: false
       field :closed, :boolean, default: false
-      field :paid_amount, :integer, default: 0
-      field :total_amount, :integer
+      field :paid_amount, :integer, default: 0, null: false
+      field :total_amount, :integer, null: false
       belongs_to :client, MicrocreditService.Client
       timestamps()
     end
