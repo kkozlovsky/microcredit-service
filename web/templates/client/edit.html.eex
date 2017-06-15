@@ -119,7 +119,7 @@
         </div>
       </div>
 
-      <%= submit "Сохранить", class: "btn btn-primary" %>
+      <%= submit "Сохранить", class: "btn btn-raised btn-primary" %>
       </div>
     <% end %>
   </div>

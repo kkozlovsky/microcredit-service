@@ -10,15 +10,19 @@
     <title>Hello MicrocreditService!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/FezVrasta/bootstrap-material-design/dist/dist/bootstrap-material-design.min.css">
+
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/style.css") %>">
   </head>
 
   <body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">Microcredit Service</a>
-    </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/">Клиенты</a></li>
       <li><a href="/loans">Кредиты</a></li>
@@ -36,9 +40,9 @@
 
       <%= if get_flash(@conn, :info) do %>
         <div class="navbar-fixed-bottom row">
-          <div class="navbar-inner">
-            <div class="container col-md-2 col-md-offset-10">
-              <div class="alert alert-info" role="alert">
+          <div class="navbar-inner col-md-2 col-md-offset-10">
+            <div class="container">
+              <div class="alert alert-dismissible alert-info">
                 <%= get_flash(@conn, :info) %>
               </div>
             </div>
@@ -50,7 +54,7 @@
         <div class="navbar-fixed-bottom row">
           <div class="navbar-inner">
             <div class="container col-md-2 col-md-offset-10">
-              <div class="alert alert-danger" role="alert">
+              <div class="alert alert-dismissible alert-danger">
                 <%= get_flash(@conn, :error) %>
               </div>
             </div>
