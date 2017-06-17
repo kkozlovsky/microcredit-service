@@ -9,7 +9,6 @@
       <th class="text-center">Выдано</th>
       <th class="text-center">Выплачено</th>
       <th class="text-center">Остаток</th>
-      <th class="text-center">Изменить</th>
     </tr>
   </thead>
   <tbody class="text-center">
@@ -22,7 +21,6 @@
       <td><%= loan.total_amount %></td>
       <td><%= loan.paid_amount %></td>
       <td><%= loan.total_amount - loan.paid_amount %></td>
-      <td><%= link "", class: "btn btn-raised btn-info material-icons", i: "build", to: loan_path(@conn, :edit, loan), method: :get %></td>     
     </tr>
   <% end %>
   </tbody>
@@ -30,15 +28,12 @@
 
 <div class="row">
 
-  <div class="col-md-4 text-center">
-    <%= link "Добавить займ", class: "btn btn-raised btn-info", to: loan_path(@conn, :show_open_loans) %>
+  <div class="col-md-6 text-center">
+    <%= link "Все займы", class: "btn btn-raised btn-default", to: loan_path(@conn, :index) %>
   </div>
 
-  <div class="col-md-4 text-center">
-    <%= link "Открытые займы", class: "btn btn-raised btn-primary", to: loan_path(@conn, :show_open_loans) %>
-  </div>
-
-  <div class="col-md-4 text-center">
+  <div class="col-md-6 text-center">
     <%= link "Закрытые займы", class: "btn btn-raised btn-warning", to: loan_path(@conn, :show_closed_loans) %>
   </div>
+  
 </div>

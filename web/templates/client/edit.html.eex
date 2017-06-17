@@ -119,8 +119,11 @@
         </div>
       </div>
 
-      <%= submit "Сохранить", class: "btn btn-raised btn-primary" %>
-      </div>
+      <div class="row">
+        <div class="col-sm-6"><%= submit "Сохранить", class: "btn btn-raised btn-info" %></div>
+        <div class="col-sm-6"><%= link "Удалить", class: "btn btn-raised btn-danger", to: client_path(@conn, :delete, @client), method: :delete %></div>
+      </div>  
+    </div>
     <% end %>
   </div>
 </div>

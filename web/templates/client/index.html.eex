@@ -9,7 +9,6 @@
       <th>Пол</th>
       <th>Телефон</th>
       <th>Id</th>
-      <th>Удалить</th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +21,6 @@
       <td><%= client.gender %></td>
       <td><%= client.phone %></td>
       <td><%= client.id %></td>
-      <td><%= link "", class: "btn btn-danger fa fa-trash", to: client_path(@conn, :delete, client), method: :delete %></td>
     </tr>
   <% end %>
   </tbody>
@@ -31,7 +29,7 @@
 <div class="row">
 
   <div class="col-md-6 text-center">
-  <%= link "Добавить клиента", class: "btn btn-raised btn-primary", to: client_path(@conn, :new) %>
+  <%= link "Добавить клиента", class: "btn btn-raised btn-info", to: client_path(@conn, :new) %>
   </div>
 
   <div class="col-md-6 text-center">
