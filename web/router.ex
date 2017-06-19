@@ -29,6 +29,13 @@ defmodule MicrocreditService.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", LoanController, :index
+    get "/open", LoanController, :show_open_loans
+    get "/closed", LoanController, :show_closed_loans
+    get "/new", LoanController, :new
+    post "/", LoanController, :create
+    get "/:id/edit", LoanController, :edit
+    put "/:id", LoanController, :update
+    delete "/:id", LoanController, :delete
   end
 
   # Other scopes may use custom stacks.

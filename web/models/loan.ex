@@ -13,8 +13,8 @@ defmodule MicrocreditService.Loan do
 
     def changeset(struct, params \\ %{}) do
         struct
-        |> cast(params, [:start_date, :due_date, :closed, :paid_amount, :total_amount])
-        |> validate_required([:start_date, :due_date, :closed, :paid_amount, :total_amount])
+        |> cast(params, [:start_date, :due_date, :closed, :paid_amount, :total_amount, :client_id])
+        |> validate_required([:start_date, :due_date, :closed, :paid_amount, :total_amount, :client_id])
     end
     
 end

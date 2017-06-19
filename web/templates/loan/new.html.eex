@@ -1,0 +1,50 @@
+<h1 class="text-center">Новый займ</h1>
+<%= form_for @changeset, loan_path(@conn, :create), fn f -> %>
+<div class="form-horizontal">
+
+  <div class="form-group">
+    <label class="col-sm-4">Даты выдачи</label>
+    <div class="col-sm-8">
+      <%= datetime_select f, :start_date, placeholder: "Даты выдачи", class: "form-control", required: "true" %>
+    </div>  
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-4">До</label>
+    <div class="col-sm-8">
+      <%= datetime_select f, :due_date, placeholder: "До", class: "form-control", required: "true" %>
+    </div>  
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-4">Закрыт</label>
+    <div class="col-sm-8">
+      <%= checkbox f, :closed %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-4">Сумма займа</label>
+    <div class="col-sm-8">
+      <%= number_input f, :total_amount, placeholder: "Сумма займа", class: "form-control", required: "true" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-4">Выплачено</label>
+    <div class="col-sm-8">
+      <%= number_input f, :paid_amount, placeholder: "Выплачено", class: "form-control", required: "true" %>
+    </div>  
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-4">Id клиента</label>
+    <div class="col-sm-8">
+      <%= number_input f, :client_id, placeholder: "Id клиента", class: "form-control", required: "true" %>
+    </div>  
+  </div>
+
+  <div class="col-sm-6"><%= submit "Сохранить", class: "btn btn-raised btn-info" %></div>
+
+</div>
+<% end %>
