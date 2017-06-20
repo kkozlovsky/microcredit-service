@@ -18,6 +18,7 @@ defmodule MicrocreditService.Router do
 
     get "/", ClientController, :index
     get "/clients/new", ClientController, :new
+    get "/clients/generate", ClientController, :generate
     post "/clients", ClientController, :create
     get "/clients/:id/edit", ClientController, :edit
     put "/clients/:id", ClientController, :update

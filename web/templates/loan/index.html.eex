@@ -34,7 +34,7 @@
   </tbody>
 </table>
 
-<div class="row">
+<div class="row bottom-buttons">
 
   <div class="col-md-4 text-center">
     <%= link "Добавить займ", class: "btn btn-raised btn-info", to: loan_path(@conn, :new) %>

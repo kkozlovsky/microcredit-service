@@ -26,13 +26,18 @@
   </tbody>
 </table>
 
-<div class="row">
+<div class="row bottom-buttons">
 
-  <div class="col-md-6 text-center">
-  <%= link "Добавить клиента", class: "btn btn-raised btn-info", to: client_path(@conn, :new) %>
+  <div class="col-md-4 text-center">
+    <%= link "Добавить клиента", class: "btn btn-raised btn-info", to: client_path(@conn, :new) %>
   </div>
 
-  <div class="col-md-6 text-center">
+  <div class="col-md-4 text-center">
+    <%= link "Сгенерировать клиента", class: "btn btn-raised btn-primary", to: client_path(@conn, :generate) %>
+  </div>
+
+  <div class="col-md-4 text-center">
     <%= link "Чёрный список", class: "btn btn-raised btn-danger", to: client_path(@conn, :show_blacklist) %>
   </div>
+  
 </div>  

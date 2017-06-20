@@ -61,4 +61,40 @@ defmodule MicrocreditService.ClientController do
     black_clients = Repo.all(query)
     render conn, "blacklist.html", clients: black_clients
   end
+
+  def generate(conn, _params) do
+    client = HTTPotion.get("http://randus.ru/api.php")
+      |> handle_json
+      |> extract_from_body_to_client
+      
+      create(conn, client)
+  end
+
+  defp handle_json(%HTTPotion.Response{status_code: 200, body: body}) do
+    {:ok, Poison.Parser.parse!(body)}
+  end
+
+  defp extract_from_body_to_client(map) do
+    {:ok, body} = map
+
+    %{"apartment" => apartment, 
+      "city" => city,
+      "date" => date, 
+      "fname" => firstname,
+      "lname" => lastname,
+      "patronymic" => pathname,
+      "gender" => gender, 
+      "house" => house, 
+      "login" => login,
+      "password" => password,
+      "phone" => phone,
+      "postcode" => postcode,
+      "street" => street,
+      "userpic" => userpic} = body
+
+      %{"client" => %{ first_name: firstname, last_name: lastname, path_name: pathname, date: date, gender: gender, blacklist: false,
+                       city: city, postcode: postcode, street: street, house: house, apartment: apartment, phone: phone,
+                       login: login, password: password, userpic: userpic }}
+  end
+
 end
