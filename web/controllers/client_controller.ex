@@ -71,11 +71,10 @@ defmodule MicrocreditService.ClientController do
   end
 
   defp handle_json(%HTTPotion.Response{status_code: 200, body: body}) do
-    {:ok, Poison.Parser.parse!(body)}
+    Poison.Parser.parse!(body)
   end
 
-  defp extract_from_body_to_client(map) do
-    {:ok, body} = map
+  defp extract_from_body_to_client(parsed_map) do
 
     %{"apartment" => apartment, 
       "city" => city,
@@ -90,7 +89,7 @@ defmodule MicrocreditService.ClientController do
       "phone" => phone,
       "postcode" => postcode,
       "street" => street,
-      "userpic" => userpic} = body
+      "userpic" => userpic} = parsed_map
 
       %{"client" => %{ first_name: firstname, last_name: lastname, path_name: pathname, date: date, gender: gender, blacklist: false,
                        city: city, postcode: postcode, street: street, house: house, apartment: apartment, phone: phone,
