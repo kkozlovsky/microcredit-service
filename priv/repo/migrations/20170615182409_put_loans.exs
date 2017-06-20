@@ -10,7 +10,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 10000,
-      client_id: 1
+      client_id: 1,
+      ip: "192.89.6.255"
     } |> Repo.insert!
 
     %Loan{
@@ -19,7 +20,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 11000,
-      client_id: 2
+      client_id: 2,
+      ip: "194.154.95.255"
     } |> Repo.insert!
 
     %Loan{
@@ -28,7 +30,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: true,
       paid_amount: 13000,
       total_amount: 13000,
-      client_id: 3
+      client_id: 3,
+      ip: "195.79.83.95"
     } |> Repo.insert!
 
     %Loan{
@@ -37,7 +40,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 3000,
-      client_id: 3
+      client_id: 3,
+      ip: "195.182.159.255"
     } |> Repo.insert!
 
     %Loan{
@@ -46,7 +50,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 30000,
-      client_id: 4
+      client_id: 4,
+      ip: "212.13.96.0"
     } |> Repo.insert!
 
     %Loan{
@@ -55,7 +60,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 24000,
-      client_id: 5
+      client_id: 5,
+      ip: "212.13.96.0"
     } |> Repo.insert!
 
     %Loan{
@@ -64,7 +70,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 22000,
-      client_id: 6
+      client_id: 6,
+      ip: "212.20.63.255"
     } |> Repo.insert!
 
     %Loan{
@@ -73,7 +80,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: true,
       paid_amount: 22000,
       total_amount: 22000,
-      client_id: 7
+      client_id: 7,
+      ip: "217.67.3.14"
     } |> Repo.insert!
 
     %Loan{
@@ -82,7 +90,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: true,
       paid_amount: 9000,
       total_amount: 9000,
-      client_id: 7
+      client_id: 7,
+      ip: "217.67.0.0"
     } |> Repo.insert!
 
     %Loan{
@@ -91,7 +100,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 19000,
-      client_id: 7
+      client_id: 7,
+      ip: "212.91.192.0"
     } |> Repo.insert!
 
     %Loan{
@@ -100,7 +110,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 25500,
-      client_id: 8
+      client_id: 8,
+      ip: "62.185.176.128"
     } |> Repo.insert!
 
     %Loan{
@@ -109,7 +120,8 @@ defmodule MicrocreditService.Repo.Migrations.PutLoans do
       closed: false,
       paid_amount: 0,
       total_amount: 35500,
-      client_id: 9
+      client_id: 9,
+      ip: "212.63.174.27"
     } |> Repo.insert!
 
 

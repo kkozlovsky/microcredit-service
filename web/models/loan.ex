@@ -7,14 +7,15 @@ defmodule MicrocreditService.Loan do
       field :closed, :boolean, default: false
       field :paid_amount, :integer, default: 0, null: false
       field :total_amount, :integer, null: false
+      field :ip, :string, null: false
       belongs_to :client, MicrocreditService.Client
       timestamps()
     end
 
     def changeset(struct, params \\ %{}) do
         struct
-        |> cast(params, [:start_date, :due_date, :closed, :paid_amount, :total_amount, :client_id])
-        |> validate_required([:start_date, :due_date, :closed, :paid_amount, :total_amount, :client_id])
+        |> cast(params, [:start_date, :due_date, :closed, :paid_amount, :total_amount, :ip, :client_id])
+        |> validate_required([:start_date, :due_date, :closed, :paid_amount, :total_amount, :ip, :client_id])
     end
     
 end

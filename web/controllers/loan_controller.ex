@@ -64,7 +64,10 @@ defmodule MicrocreditService.LoanController do
 
 
   def create(conn, %{"loan" => loan}) do
-    changeset = Loan.changeset(%Loan{}, loan)
+    ip = get_loan_ip()
+    loan_with_ip = Map.put(loan, "ip", ip)
+    
+    changeset = Loan.changeset(%Loan{}, loan_with_ip)
 
     case Repo.insert(changeset) do
       {:ok, _loan} ->
@@ -76,6 +79,21 @@ defmodule MicrocreditService.LoanController do
         |> put_flash(:info, "Не удалось создать займ")
         render conn, "new.html", changeset: changeset
     end
+  end
+
+
+  defp get_loan_ip() do
+    HTTPotion.get("http://api.sypexgeo.net")
+      |> handle_json
+      |> extract_from_body_to_ip
+  end
+
+  defp handle_json(%HTTPotion.Response{status_code: 200, body: body}) do
+    Poison.Parser.parse!(body)
+  end
+
+  defp extract_from_body_to_ip(%{"ip" => ip}) do
+    ip
   end
 
 end  
