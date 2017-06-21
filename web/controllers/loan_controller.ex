@@ -2,6 +2,7 @@ defmodule MicrocreditService.LoanController do
   use MicrocreditService.Web, :controller
 
   alias MicrocreditService.Loan
+  import Plug.Conn
 
   def index(conn, _params) do
     loans = Repo.all(Loan)
@@ -65,20 +66,29 @@ defmodule MicrocreditService.LoanController do
 
   def create(conn, %{"loan" => loan}) do
     ip = get_loan_ip()
-    loan_with_ip = Map.put(loan, "ip", ip)
-    
-    changeset = Loan.changeset(%Loan{}, loan_with_ip)
+    is_throttle_need = get_last_loan_ip(ip) |> minute_from_last_loan?
 
-    case Repo.insert(changeset) do
-      {:ok, _loan} ->
-        conn
-        |> put_flash(:info, "Займ добавлен")
+    if is_throttle_need do
+      conn
+        |> put_flash(:error, "Прошло меньше минуты")
         |> redirect(to: loan_path(conn, :index))
-      {:error, changeset} ->
-        conn
-        |> put_flash(:info, "Не удалось создать займ")
-        render conn, "new.html", changeset: changeset
+        |> halt()
+    else
+      loan_with_ip = Map.put(loan, "ip", ip)
+      changeset = Loan.changeset(%Loan{}, loan_with_ip)
+
+      case Repo.insert(changeset) do
+        {:ok, _loan} ->
+          conn
+          |> put_flash(:info, "Займ добавлен")
+          |> redirect(to: loan_path(conn, :index))
+        {:error, changeset} ->
+          conn
+          |> put_flash(:info, "Не удалось создать займ")
+          render conn, "new.html", changeset: changeset
+      end
     end
+
   end
 
 
@@ -88,12 +98,34 @@ defmodule MicrocreditService.LoanController do
       |> extract_from_body_to_ip
   end
 
+
   defp handle_json(%HTTPotion.Response{status_code: 200, body: body}) do
     Poison.Parser.parse!(body)
   end
 
+
   defp extract_from_body_to_ip(%{"ip" => ip}) do
     ip
+  end
+
+
+  defp get_last_loan_ip(ip) do
+    query = from l in Loan, 
+            where: l.ip == ^ip,
+            order_by: [desc: l.inserted_at], 
+            limit: 1,
+            select: l.inserted_at
+
+    Repo.one(query)
+  end
+  
+
+  defp minute_from_last_loan?(last_ip_time) do
+    cond do
+      is_nil(last_ip_time) -> false
+      Timex.Comparable.diff(DateTime.utc_now(), last_ip_time, :seconds ) < 60 -> true
+      true -> false
+    end      
   end
 
 end  

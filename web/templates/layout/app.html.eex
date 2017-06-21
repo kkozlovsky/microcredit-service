@@ -36,34 +36,30 @@
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-      <%= if get_flash(@conn, :info) do %>
         <div class="navbar-fixed-bottom row">
           <div class="navbar-inner col-md-2 col-md-offset-10">
             <div class="container">
-              <div class="alert alert-dismissible alert-info">
-                <%= get_flash(@conn, :info) %>
-              </div>
-            </div>
-          </div>
-        </div>      
-      <% end %>
 
-      <%= if get_flash(@conn, :error) do %>
-        <div class="navbar-fixed-bottom row">
-          <div class="navbar-inner">
-            <div class="container col-md-2 col-md-offset-10">
-              <div class="alert alert-dismissible alert-danger">
-                <%= get_flash(@conn, :error) %>
-              </div>
+              <%= if info = get_flash(@conn, :info) do %>
+                <div class="alert alert-dismissable alert-info">
+                  <p><%= info %></p>
+                </div>
+              <% end %>
+
+              <%= if error = get_flash(@conn, :error) do %>
+                <div class="alert alert-dismissable alert-danger">
+                  <p><%= error %></p>
+                </div>
+              <% end %>
+              
             </div>
           </div>
         </div>      
-      <% end %>
-      
+
     </div> <!-- /container -->
 
 
-
+    
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
