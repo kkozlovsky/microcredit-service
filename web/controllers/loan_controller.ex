@@ -1,8 +1,12 @@
 defmodule MicrocreditService.LoanController do
   use MicrocreditService.Web, :controller
 
-  alias MicrocreditService.Loan
+  import Ecto.Query
   import Plug.Conn
+
+  alias MicrocreditService.Loan
+  alias MicrocreditService.Client
+
 
   def index(conn, _params) do
     loans = Repo.all(Loan)
@@ -65,28 +69,36 @@ defmodule MicrocreditService.LoanController do
 
 
   def create(conn, %{"loan" => loan}) do
-    ip = get_loan_ip()
-    is_throttle_need = get_last_loan_ip(ip) |> minute_from_last_loan?
 
-    if is_throttle_need do
+    if is_client_in_blaclist?(loan) do
       conn
-        |> put_flash(:error, "Прошло меньше минуты")
+        |> put_flash(:error, "Пользователь в чёрном списке!")
         |> redirect(to: loan_path(conn, :index))
         |> halt()
     else
-      loan_with_ip = Map.put(loan, "ip", ip)
-      changeset = Loan.changeset(%Loan{}, loan_with_ip)
+      ip = get_loan_ip()
+      is_throttle_need = get_last_loan_ip(ip) |> minute_from_last_loan?
 
-      case Repo.insert(changeset) do
-        {:ok, _loan} ->
-          conn
-          |> put_flash(:info, "Займ добавлен")
+      if is_throttle_need do
+        conn
+          |> put_flash(:error, "Прошло меньше минуты")
           |> redirect(to: loan_path(conn, :index))
-        {:error, changeset} ->
-          conn
-          |> put_flash(:info, "Не удалось создать займ")
-          render conn, "new.html", changeset: changeset
-      end
+          |> halt()
+        else
+          loan_with_ip = Map.put(loan, "ip", ip)
+          changeset = Loan.changeset(%Loan{}, loan_with_ip)
+
+          case Repo.insert(changeset) do
+            {:ok, _loan} ->
+              conn
+              |> put_flash(:info, "Займ добавлен")
+              |> redirect(to: loan_path(conn, :index))
+            {:error, changeset} ->
+              conn
+              |> put_flash(:info, "Не удалось создать займ")
+              render conn, "new.html", changeset: changeset
+          end
+        end
     end
 
   end
@@ -121,11 +133,17 @@ defmodule MicrocreditService.LoanController do
   
 
   defp minute_from_last_loan?(last_ip_time) do
-    cond do
-      is_nil(last_ip_time) -> false
-      Timex.Comparable.diff(DateTime.utc_now(), last_ip_time, :seconds ) < 60 -> true
-      true -> false
+    if is_nil(last_ip_time) do
+      false
+    else
+      Timex.Comparable.diff(DateTime.utc_now(), last_ip_time, :seconds ) < 60
     end      
+  end
+
+
+  defp is_client_in_blaclist?(%{"client_id" => client_id}) do
+    query = from u in Client, where: u.id == ^client_id, select: u.blacklist
+    Repo.one(query)
   end
 
 end  
